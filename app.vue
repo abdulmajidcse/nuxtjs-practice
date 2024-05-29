@@ -1,20 +1,15 @@
 <script setup lang="ts">
-const counter = useState("counter", () => 0);
+import { onMounted } from "vue";
+import { initFlowbite } from "flowbite";
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+  initFlowbite();
+});
 </script>
 
 <template>
-  <div>
-    <button @click="counter++">Counter = {{ counter }}</button>
-    <div>
-      <nav>
-        <ul>
-          <li><NuxtLink to="/">Home</NuxtLink></li>
-          <li><NuxtLink to="/about">About</NuxtLink></li>
-        </ul>
-      </nav>
-    </div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
