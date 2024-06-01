@@ -8,6 +8,7 @@ defineProps<{
   required?: boolean;
   labelClass?: string;
   inputClass?: string;
+  name?: string;
 }>();
 </script>
 
@@ -24,6 +25,7 @@ defineProps<{
       :class="inputClass"
       :id="id"
       :required="required ?? false"
+      :name="name ?? id"
       v-model="model"
       class="input-control"
     />

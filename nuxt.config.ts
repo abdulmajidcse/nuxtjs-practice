@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "@vesp/nuxt-fontawesome",
   ],
+  plugins: ["~/plugins/init-auth"],
   fontawesome: {
     icons: {
       solid: ["rotate"],

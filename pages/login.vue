@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useLoadingStore } from "~/stores/loading";
+import { useAuthStore, type User } from "~/stores/auth";
 
 const loadingStore = useLoadingStore();
+const authStore = useAuthStore();
 
 const data = reactive({
   username: "",
@@ -9,16 +11,28 @@ const data = reactive({
   remember: false,
 });
 
+definePageMeta({
+  middleware: "guest",
+});
+
 const { $toast } = useNuxtApp();
 
 const submit = async () => {
   loadingStore.startLoading();
   try {
-    const loginData = await $fetch("https://dummyjson.com/auth/login", {
+    const loginData: User = await $fetch("https://dummyjson.com/auth/login", {
       method: "POST",
       body: data,
     });
 
+    // reset state data
+    data.username = "";
+    data.password = "";
+    data.remember = false;
+
+    // update auth store
+    authStore.updateToken(loginData);
+    navigateTo("/dashboard");
     $toast("Login successed!");
   } catch (error: any) {
     $toast(error.response?._data?.message ?? "Something is wrong!", "error");

@@ -1,5 +1,20 @@
 <script setup lang="ts">
+import { useAuthStore } from "~/stores/auth";
+import { initFlowbite } from "flowbite";
+
+const authStore = useAuthStore();
 const route = useRoute();
+const { $toast } = useNuxtApp();
+
+const logout = () => {
+  authStore.logout();
+  navigateTo("/login");
+  $toast("Logout successed!");
+};
+
+onUpdated(() => {
+  initFlowbite();
+});
 </script>
 
 <template>
@@ -57,7 +72,7 @@ const route = useRoute();
               >Home</NuxtLink
             >
           </li>
-          <li>
+          <li v-if="!authStore.isLoggedIn">
             <NuxtLink
               to="/login"
               :class="[
@@ -66,7 +81,7 @@ const route = useRoute();
               >Login</NuxtLink
             >
           </li>
-          <li>
+          <li v-if="!authStore.isLoggedIn">
             <NuxtLink
               to="/register"
               :class="[
@@ -77,13 +92,13 @@ const route = useRoute();
               >Register</NuxtLink
             >
           </li>
-          <li>
+          <li v-if="authStore.isLoggedIn">
             <button
               id="dropdownNavbarLink"
               data-dropdown-toggle="dropdownNavbar"
               class="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
             >
-              Dropdown
+              Hello, {{ authStore.user?.firstName }}
               <svg
                 class="w-2.5 h-2.5 ms-2.5"
                 aria-hidden="true"
@@ -127,6 +142,7 @@ const route = useRoute();
               <div class="py-1">
                 <button
                   type="button"
+                  @click="logout"
                   class="w-full flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Logout

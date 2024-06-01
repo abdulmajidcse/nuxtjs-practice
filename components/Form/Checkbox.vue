@@ -12,6 +12,7 @@ const props = defineProps<{
   required?: boolean;
   labelClass?: string;
   inputClass?: string;
+  name?: string;
 }>();
 </script>
 
@@ -25,6 +26,7 @@ const props = defineProps<{
         @change="checkboxToggle"
         :checked="modelValue"
         :id="id"
+        :name="name ?? id"
         :required="required ?? false"
       />
     </div>

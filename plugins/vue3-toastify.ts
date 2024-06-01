@@ -10,6 +10,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         toast(message, {
           position: toast.POSITION.TOP_CENTER,
           type,
+          autoClose: 5000,
         }),
     },
   };
