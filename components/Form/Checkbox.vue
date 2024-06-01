@@ -1,8 +1,14 @@
 <script setup lang="ts">
-defineProps<{
+const emit = defineEmits(["update:modelValue"]);
+
+const checkboxToggle = () => {
+  emit("update:modelValue", !props.modelValue);
+};
+
+const props = defineProps<{
+  modelValue: boolean;
   id: string;
   title?: string;
-  type?: string;
   required?: boolean;
   labelClass?: string;
   inputClass?: string;
@@ -12,9 +18,12 @@ defineProps<{
 <template>
   <div class="flex items-start mb-5">
     <div class="flex items-center h-5">
-      <Input
-        :type="type"
-        :class="`!w-4 !h-4 !text-blue-600 !dark:text-blue-900 ${inputClass}`"
+      <input
+        type="checkbox"
+        class="input-control !w-4 !h-4 !text-blue-600 !dark:text-blue-900"
+        :class="inputClass"
+        @change="checkboxToggle"
+        :checked="modelValue"
         :id="id"
         :required="required ?? false"
       />

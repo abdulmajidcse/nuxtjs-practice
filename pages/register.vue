@@ -3,7 +3,7 @@ const data = reactive({
   email: "",
   password: "",
   repeat_password: "",
-  terms: "",
+  terms: false,
 });
 </script>
 
@@ -23,12 +23,12 @@ const data = reactive({
       title="Repeat password"
       required
     />
-    <FormToggle type="checkbox" id="terms" required>
+    <FormCheckbox id="terms" v-model="data.terms" required>
       I agree with the
       <a href="#" class="text-blue-600 hover:underline dark:text-blue-500"
         >terms and conditions</a
       >
-    </FormToggle>
+    </FormCheckbox>
 
     <button
       type="submit"

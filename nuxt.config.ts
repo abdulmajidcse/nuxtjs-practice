@@ -1,6 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@vesp/nuxt-fontawesome",
+  ],
+  fontawesome: {
+    icons: {
+      solid: ["rotate"],
+      regular: ["user"],
+    },
+  },
 });

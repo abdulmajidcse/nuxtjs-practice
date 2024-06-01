@@ -14,16 +14,18 @@ defineProps<{
 <template>
   <div class="mb-5">
     <Label :for="id" :class="labelClass">
-      <slot name="title">
+      <slot>
         {{ title }}
       </slot>
     </Label>
-    <Input
-      v-model="model"
+
+    <input
       :type="type"
       :class="inputClass"
       :id="id"
       :required="required ?? false"
+      v-model="model"
+      class="input-control"
     />
   </div>
 </template>
